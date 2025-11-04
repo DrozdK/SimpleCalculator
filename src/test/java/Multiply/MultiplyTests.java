@@ -13,7 +13,7 @@ public class MultiplyTests {
 
     @Test
     public void multiplicationWithAllPositiveNumbersTest() {
-        Assert.assertEquals((Actions.calculator(6, 6, '*')), "36");
+        Assert.assertEquals((Actions.calculator(7, 7, '*')), "49");
     }
 
     @Test
