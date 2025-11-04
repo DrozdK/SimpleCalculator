@@ -18,7 +18,7 @@ public class AdditionalTests {
 
     @Test
     public void additionalWithFirstNegativeNumberTest() {
-        Assert.assertEquals((Actions.calculator(-5, 4, '+')), "-1");
+        Assert.assertEquals((Actions.calculator(-6, 4, '+')), "-2");
     }
 
     @Test
