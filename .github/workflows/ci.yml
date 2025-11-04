@@ -1,25 +1,29 @@
-name: Execute Jenkins Logic
+name: CI Pipeline
 
 on:
   push:
     branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
-  run-jenkins-logic:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Java and Maven
+      - name: Set up Java
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
+          cache: 'maven'
 
-      - name: Execute Jenkins pipeline steps
-        run: |
-          echo "Executing steps from Jenkinsfile..."
-          mvn clean test
-          echo "Pipeline completed!"
+      - name: Build and test with Maven
+        run: mvn clean test
+
+      - name: Test completed
+        run: echo "✅ Pipeline executed successfully!"
