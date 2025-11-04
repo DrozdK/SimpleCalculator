@@ -1,18 +1,25 @@
-name: Execute Jenkinsfile
+name: Execute Jenkins Logic
 
 on:
   push:
     branches: [ main ]
 
 jobs:
-  execute-jenkinsfile:
+  run-jenkins-logic:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      
-    - name: Parse and execute Jenkinsfile
-      uses: some-community/jenkinsfile-runner-action@v1
-      with:
-        jenkinsfile: './Jenkinsfile'
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Java and Maven
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Execute Jenkins pipeline steps
+        run: |
+          echo "Executing steps from Jenkinsfile..."
+          mvn clean test
+          echo "Pipeline completed!"
